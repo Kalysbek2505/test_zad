@@ -1,0 +1,38 @@
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test CRUD and WebSockets</title>
+    <script>
+        // Функция для отправки POST-запроса на создание пользователя
+        function createUser() {
+            fetch('/api/users/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username: "testuser", email: "testuser@example.com"})
+            })
+            .then(response => response.json())
+            .then(data => console.log("Пользователь создан:", data))
+            .catch(error => console.error("Ошибка:", error));
+        }
+
+        // Подключение к веб-сокету и получение уведомлений
+        const socket = new WebSocket('ws://localhost:8000/ws/notifications/');
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            document.getElementById('notifications').innerHTML += `<p>${data.message}</p>`;
+        };
+    </script>
+</head>
+<body>
+    <h1>Тестовая страница для CRUD и WebSocket уведомлений</h1>
+
+    <button onclick="createUser()">Создать пользователя</button>
+
+    <h2>Уведомления</h2>
+    <div id="notifications"></div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Test</title>
+</head>
+<body>
+    <h1>Notifications</h1>
+    <div id="notifications"></div>
+
+    <script>
+        // Подключение к веб-сокету
+        const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
+
+        // Обработка получения сообщений
+        socket.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            const notificationsDiv = document.getElementById('notifications');
+            // Добавляем новое уведомление на страницу
+            notificationsDiv.insertAdjacentHTML('beforeend', `<p>${data.message}</p>`);
+        };
+
+        // Обработка закрытия соединения
+        socket.onclose = function(event) {
+            console.log('WebSocket connection closed', event);
+        };
+    </script>
+</body>
+</html>
