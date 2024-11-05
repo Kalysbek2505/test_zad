@@ -11,7 +11,8 @@
 
     <script>
         // Подключение к веб-сокету
-        const socket = new WebSocket('ws://' + window.location.host + '/ws/notifications/');
+        const socket = new WebSocket('wss://test-zad.onrender.com/ws/notifications/');
+
 
         // Обработка получения сообщений
         socket.onmessage = function(event) {
