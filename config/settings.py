@@ -113,7 +113,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [("redis", 6379)],  
+            "hosts": [(REDIS_URL, 6379)],  
         },
     },
 }
@@ -131,6 +131,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+import redis
+REDIS_URL = os.environ.get('REDIS_URL')
+redis_instance = redis.from_url(REDIS_URL)
 
 LOGIN_URL = '/admin/login/'
 LOGOUT_URL = '/admin/logout/'
