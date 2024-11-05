@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ASGI_APPLICATION = 'config.asgi.application'
 
-
+REDIS_URL = os.environ.get('REDIS_URL')
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -133,7 +133,7 @@ USE_TZ = True
 
 
 import redis
-REDIS_URL = os.environ.get('REDIS_URL')
+
 redis_instance = redis.from_url(REDIS_URL)
 
 LOGIN_URL = '/admin/login/'
