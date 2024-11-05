@@ -5,3 +5,4 @@ channels
 channels_redis
 drf-yasg 
 daphne
+python-decouple
