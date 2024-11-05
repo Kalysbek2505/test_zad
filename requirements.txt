@@ -7,3 +7,4 @@ drf-yasg
 daphne
 python-decouple
 dj-database-url
+gunicorn
